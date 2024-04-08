@@ -1,6 +1,10 @@
 " Use vim-plug as plugin manager
 call plug#begin()
 
+" https://github.com/junegunn/fzf.vim
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
 " https://github.com/mhinz/vim-startify
 Plug 'mhinz/vim-startify'
 
@@ -10,16 +14,16 @@ Plug 'preservim/nerdtree'
 " https://github.com/christoomey/vim-tmux-navigator
 Plug 'christoomey/vim-tmux-navigator'
 
-" https://github.com/junegunn/fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
 " https://github.com/mileszs/ack.vim
 Plug 'mileszs/ack.vim'
 
 " https://github.com/sheerun/vim-polyglot
 Plug 'sheerun/vim-polyglot'
 
+" https://github.com/RRethy/vim-illuminate
+Plug 'RRethy/vim-illuminate',
+
+" https://github.com/psliwka/vim-smoothie
 Plug 'psliwka/vim-smoothie'
 
 " https://github.com/tpope/vim-commentary
@@ -34,8 +38,8 @@ Plug 'tpope/vim-fugitive'
 " https://github.com/itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
 
-" https://github.com/sainnhe/everforest
-Plug 'sainnhe/everforest'
+" https://github.com/joshdick/onedark.vim
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -49,6 +53,7 @@ let mapleader = ","
 
 " Save file.
 nmap <leader>w :w!<CR>
+
 " Exit file.
 nmap <leader>q :q!<CR>
 
@@ -59,15 +64,20 @@ nmap <leader>n :cn<CR>
 nmap <leader>p :cp<CR>
 
 " Splict window vertically.
-map <leader>sv :<C-w>v
+map <leader>sv :vsplit<CR>
 
 " Splict window horizontally.
-map <leader>sh :<C-w>s
+map <leader>sh :split<CR>
+
+" Indentation in visual mode using '<' and '>'.
+xnoremap < <gv
+xnoremap > >gv
 
 " Set the character encoding used inside Vim.
 set encoding=utf-8
 
 " Enables mouse support in Normal/Visual mode.
+" Real hackers don't use mouse for navigation!
 set mouse=nv
 
 " Let the command-line completion operates in an enhanced mode.
@@ -158,14 +168,21 @@ set laststatus=2
 
 " Highlight search items.
 set hlsearch
+
 " Incremental search, show search matches as you type in each character.
 set incsearch
+
+" Ignore case in search patterns.
+set ignorecase
+
 " Smart case sensitive.
+" Override the 'ignorecase' option if the search pattern contains upper case
+" characters.
 " This setting makes search case-insensitive when all characters in the string
 " being searched are lowercase. However, the search becomes case-sensitive if
 " it contains any capital letters. This makes searching more convenient.
-set ignorecase
 set smartcase
+
 " Show matching parenthesis.
 set showmatch
 
@@ -175,42 +192,45 @@ set showmatch
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Everforest
+" ==> OneDark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:everforest_background = 'hard'
-colorscheme everforest
+colorscheme onedark
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin FzF
+" ==> LightLine
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = { 'colorscheme': 'one' }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ==> FzF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <C-p> :Files<CR>
+nmap <leader>f :Rg<CR>
 nmap <leader>b :Buffers<CR>
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Ack
+" ==> Ack
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>g :Ack!<CR>
-" Use the the_silver_searcher if possible (much faster than Ack)
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
+" Faster search with ripgrep.
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --smart-case --no-column'
 endif
-" When you press gv you Ack after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 " Use this option to highlight the searched term.
-let g:ackhightlight=1
+let g:ackhighlight=1
 " Enable blank searches to run against the word under the cursor.
 " When this option is not set, blank searches will only output an error message.
 let g:ack_use_cword_for_empty_search=1
+" Fast search against the word under the cursor.
+map <leader>g :Ack!<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin NerdTree
+" ==> NerdTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>t :NERDTreeToggle<CR>
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" Do not show hidden files
-let NERDTreeShowHidden=0
+" Show hidden files.
+let NERDTreeShowHidden=1
 
