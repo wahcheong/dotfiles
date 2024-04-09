@@ -1,3 +1,10 @@
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      endif
+
+
 " Use vim-plug as plugin manager
 call plug#begin()
 
@@ -22,9 +29,6 @@ Plug 'sheerun/vim-polyglot'
 
 " https://github.com/RRethy/vim-illuminate
 Plug 'RRethy/vim-illuminate',
-
-" https://github.com/psliwka/vim-smoothie
-Plug 'psliwka/vim-smoothie'
 
 " https://github.com/tpope/vim-commentary
 Plug 'tpope/vim-commentary'
@@ -82,6 +86,10 @@ set mouse=nv
 
 " Let the command-line completion operates in an enhanced mode.
 set wildmenu
+
+" Display the completion matches using the popup menu.
+set wildoptions=pum
+set wildmode=longest:full,full
 
 " Not show mode since we have a plugin to do it.
 set noshowmode
