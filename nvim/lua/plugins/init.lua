@@ -14,13 +14,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- 按功能模块导入插件
-  { import = 'plugins.modules.ui' },           -- 用户界面
-  { import = 'plugins.modules.editor' },       -- 编辑器增强
-  { import = 'plugins.modules.coding' },       -- 代码开发
-  { import = 'plugins.modules.navigation' },   -- 导航搜索
-  { import = 'plugins.modules.tools' },        -- 工具插件
-  { import = 'plugins.modules.ai' },           -- AI工具
+  { import = 'plugins.modules.ui' },
+  { import = 'plugins.modules.editor' },
+  { import = 'plugins.modules.coding' },
+  { import = 'plugins.modules.navigation' },
+  { import = 'plugins.modules.tools' },
+  { import = 'plugins.modules.ai' },
 
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -35,7 +34,7 @@ require('lazy').setup({
     timeout = 300, -- Seconds
   },
   install = {
-    colorscheme = { "tokyonight", "habamax"},
+    colorscheme = { "tokyonight", "habamax" },
     missing = true,
   },
   checker = {

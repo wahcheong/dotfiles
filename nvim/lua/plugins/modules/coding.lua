@@ -18,7 +18,7 @@ return {
   -- https://github.com/nvim-treesitter/nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = true,
+    lazy = false,
     config = function()
       require("nvim-treesitter.configs").setup({
         -- A list of parser names, or "all" (the listed parsers should always be installed)
