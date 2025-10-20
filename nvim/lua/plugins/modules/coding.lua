@@ -6,11 +6,11 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("telescope").setup()
-      vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-      vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
-      vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
-      vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
-      vim.keymap.set("n", "<leader>fs", "<cmd>Telescope grep_string<cr>", { desc = "Grep String" })
+      vim.keymap.set("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+      vim.keymap.set("n", "<leader>f", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
+      vim.keymap.set("n", "<leader>g", "<cmd>Telescope grep_string<cr>", { desc = "Grep String" })
+      vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
+      vim.keymap.set("n", "<leader>h", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
     end,
   },
 
