@@ -67,6 +67,10 @@ Plug 'ervandew/supertab'
 " https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-fugitive'
 
+" Git diff signs in the sign column
+" https://github.com/airblade/vim-gitgutter
+Plug 'airblade/vim-gitgutter'
+
 " Status line
 " https://github.com/itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
